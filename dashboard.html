@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loan Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a class="brand" href="index.html">LightStreamsLoan</a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn outline">← Back to Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>My Loan Applications</h2>
+    <p class="muted">Below is a list of applications you have submitted.</p>
+
+    <table class="app-table" id="applicationsTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Amount</th>
+      <th>Purpose</th>
+      <th>Date</th>
+      <th>Action</th> <!-- ✅ New column for Delete -->
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Populated by JS -->
+  </tbody>
+</table>
+
+
+    <p id="noData" class="muted">No applications found.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 LightStreamsLoan. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Load saved applications
+    const tableBody = document.querySelector('#applicationsTable tbody');
+    const noData = document.getElementById('noData');
+
+    const apps = JSON.parse(localStorage.getItem('applications') || "[]");
+
+    if (apps.length > 0) {
+      noData.style.display = "none";
+      apps.forEach(app => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${app.fullname}</td>
+          <td>${app.email}</td>
+          <td>${app.phone}</td>
+          <td>$${app.amount}</td>
+          <td>${app.purpose}</td>
+          <td>${app.date}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    } else {
+      document.getElementById('applicationsTable').style.display = "none";
+    }
+  </script>
+</body>
+</html>
