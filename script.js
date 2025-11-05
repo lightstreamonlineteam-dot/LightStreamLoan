@@ -1,6 +1,5 @@
 // ----------------------------
 // Smooth Scroll Helper
-
 // ----------------------------
 function scrollToId(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -143,22 +142,14 @@ document.querySelectorAll(".modal").forEach((modal) => {
 // ----------------------------
 const loanForm = document.getElementById("loanForm");
 const steps = document.querySelectorAll(".form-step");
-const progressSteps = document.querySelectorAll(".progress-step");
-const progressBar = document.querySelector(".progress-bar"); // optional progress line
 const nextBtns = document.querySelectorAll(".next");
 const prevBtns = document.querySelectorAll(".prev");
 
 let formStep = 0;
 
-// Update steps + progress bar
+// Update steps
 function updateFormSteps() {
   steps.forEach((s, i) => s.classList.toggle("active", i === formStep));
-  progressSteps.forEach((p, i) => p.classList.toggle("active", i <= formStep));
-
-  if (progressBar) {
-    progressBar.style.width =
-      ((formStep + 1) / steps.length) * 100 + "%";
-  }
 }
 
 // Validate required fields before going next
@@ -200,23 +191,72 @@ loanForm?.addEventListener("input", () => {
   );
 });
 
+// Validate all steps before submission
+function validateAllSteps() {
+  const allInputs = loanForm.querySelectorAll('input[required], select[required]');
+  for (let input of allInputs) {
+    if (!input.value.trim()) {
+      showToast(`⚠️ Please fill out: ${input.name || input.previousElementSibling?.textContent || 'Required field'}`);
+      // Find which step this input is in and go to that step
+      const step = input.closest('.form-step');
+      if (step) {
+        const stepIndex = Array.from(steps).indexOf(step);
+        if (stepIndex !== -1) {
+          formStep = stepIndex;
+          updateFormSteps();
+        }
+      }
+      input.focus();
+      return false;
+    }
+  }
+  return true;
+}
+
 // Final Submit
 loanForm?.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (!validateStep(formStep)) return;
+  
+  console.log('Form submitted');
+  
+  if (!validateAllSteps()) {
+    showToast('❌ Please complete all required fields');
+    return;
+  }
 
-  const data = Object.fromEntries(new FormData(loanForm).entries());
-  data.date = new Date().toLocaleString();
+  // Collect all form data
+  const formData = new FormData(loanForm);
+  const data = Object.fromEntries(formData.entries());
+  
+  console.log('Form data:', data);
 
-  const apps = JSON.parse(localStorage.getItem("applications") || "[]");
-  apps.push(data);
-  localStorage.setItem("applications", JSON.stringify(apps));
+  // Create application object with the correct field names
+  const application = {
+    fullname: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+    email: data.email || '',
+    phone: data.mobile_phone || data.home_phone || '',
+    amount: data.loan_amount || '',
+    purpose: data.reason || '',
+    date: new Date().toLocaleString(),
+    // Include all other form data
+    ...data
+  };
 
-  showToast("✅ Application Submitted Successfully!");
+  // Save to localStorage
+  const apps = JSON.parse(localStorage.getItem('applications') || '[]');
+  apps.push(application);
+  localStorage.setItem('applications', JSON.stringify(apps));
+
+  showToast('✅ Application Submitted Successfully!');
   loanForm.reset();
-  localStorage.removeItem("loan_draft");
+  localStorage.removeItem('loan_draft');
   formStep = 0;
   updateFormSteps();
+  
+  // Redirect to dashboard after submission
+  setTimeout(() => {
+    window.location.href = 'dashboard.html';
+  }, 2000);
 });
 
 // Restore draft
@@ -231,6 +271,36 @@ window.addEventListener("DOMContentLoaded", () => {
     loanForm.reason.value = loanType;
   }
   updateFormSteps();
+});
+
+// ----------------------------
+// Auto-format Expiration Date with /
+// ----------------------------
+document.addEventListener('DOMContentLoaded', function() {
+  const expInput = document.querySelector('input[name="exp"]');
+  
+  if (expInput) {
+    expInput.addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+      
+      // Auto-insert / after 2 digits
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+      }
+      
+      e.target.value = value;
+    });
+
+    // Also handle paste events
+    expInput.addEventListener('paste', function(e) {
+      setTimeout(() => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+          e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+      }, 0);
+    });
+  }
 });
 
 // ----------------------------

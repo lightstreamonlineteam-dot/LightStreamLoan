@@ -21,22 +21,20 @@
     <p class="muted">Below is a list of applications you have submitted.</p>
 
     <table class="app-table" id="applicationsTable">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Amount</th>
-      <th>Purpose</th>
-      <th>Date</th>
-      <th>Action</th> <!-- ✅ New column for Delete -->
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Populated by JS -->
-  </tbody>
-</table>
-
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Amount</th>
+          <th>Purpose</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
 
     <p id="noData" class="muted">No applications found.</p>
   </main>
@@ -59,12 +57,12 @@
       apps.forEach(app => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${app.fullname}</td>
-          <td>${app.email}</td>
-          <td>${app.phone}</td>
-          <td>$${app.amount}</td>
-          <td>${app.purpose}</td>
-          <td>${app.date}</td>
+          <td>${app.fullname || 'N/A'}</td>
+          <td>${app.email || 'N/A'}</td>
+          <td>${app.phone || 'N/A'}</td>
+          <td>$${app.amount || '0'}</td>
+          <td>${app.purpose || 'N/A'}</td>
+          <td>${app.date || 'N/A'}</td>
         `;
         tableBody.appendChild(row);
       });
