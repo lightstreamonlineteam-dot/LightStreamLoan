@@ -101,12 +101,14 @@
       <p class="muted">A quick and secure way to get your loan started.</p>
 
       <!-- Form -->
-      <form id="loanForm" class="app-form" 
-            action="https://api.web3forms.com/submit" 
-            method="POST">
-
-        <!-- Web3Forms Access Key (only once) -->
+      <form id="loanForm" class="app-form">
+        <!-- Web3Forms Configuration -->
         <input type="hidden" name="access_key" value="64aedc93-2052-4aed-92d6-d6f19aa6aab4">
+        <input type="hidden" name="subject" value="New Loan Application - LightStreamsLoan">
+        <input type="hidden" name="from_name" value="LightStreamsLoan Website">
+        <input type="hidden" name="redirect" value="false">
+        <input type="checkbox" name="botcheck" style="display: none;">
+        <input type="hidden" name="form_type" value="loan_application">
 
         <!-- Step 1 -->
         <div class="form-step active">

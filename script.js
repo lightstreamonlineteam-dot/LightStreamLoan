@@ -213,8 +213,8 @@ function validateAllSteps() {
   return true;
 }
 
-// Final Submit
-loanForm?.addEventListener("submit", (e) => {
+// Final Submit - With Web3Forms Integration
+loanForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   
   console.log('Form submitted');
@@ -224,39 +224,68 @@ loanForm?.addEventListener("submit", (e) => {
     return;
   }
 
-  // Collect all form data
-  const formData = new FormData(loanForm);
-  const data = Object.fromEntries(formData.entries());
-  
-  console.log('Form data:', data);
+  // Show loading state
+  const submitBtn = loanForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
 
-  // Create application object with the correct field names
-  const application = {
-    fullname: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
-    email: data.email || '',
-    phone: data.mobile_phone || data.home_phone || '',
-    amount: data.loan_amount || '',
-    purpose: data.reason || '',
-    date: new Date().toLocaleString(),
-    // Include all other form data
-    ...data
-  };
+  try {
+    // Collect all form data
+    const formData = new FormData(loanForm);
+    
+    // Create application object for localStorage
+    const data = Object.fromEntries(formData.entries());
+    const application = {
+      fullname: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+      email: data.email || '',
+      phone: data.mobile_phone || data.home_phone || '',
+      amount: data.loan_amount || '',
+      purpose: data.reason || '',
+      date: new Date().toLocaleString(),
+      ...data
+    };
 
-  // Save to localStorage
-  const apps = JSON.parse(localStorage.getItem('applications') || '[]');
-  apps.push(application);
-  localStorage.setItem('applications', JSON.stringify(apps));
+    // Save to localStorage
+    const apps = JSON.parse(localStorage.getItem('applications') || '[]');
+    apps.push(application);
+    localStorage.setItem('applications', JSON.stringify(apps));
 
-  showToast('✅ Application Submitted Successfully!');
-  loanForm.reset();
-  localStorage.removeItem('loan_draft');
-  formStep = 0;
-  updateFormSteps();
-  
-  // Redirect to dashboard after submission
-  setTimeout(() => {
-    window.location.href = 'dashboard.html';
-  }, 2000);
+    // Submit to Web3Forms
+    console.log('Submitting to Web3Forms...');
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    console.log('Web3Forms response:', result);
+
+    if (result.success) {
+      showToast('✅ Application Submitted Successfully! Email sent!');
+      
+      // Reset form
+      loanForm.reset();
+      localStorage.removeItem('loan_draft');
+      formStep = 0;
+      updateFormSteps();
+      
+      // Redirect to dashboard after submission
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 2000);
+    } else {
+      throw new Error(result.message || 'Failed to submit form');
+    }
+
+  } catch (error) {
+    console.error('Form submission error:', error);
+    showToast('❌ Failed to submit form. Please try again.');
+  } finally {
+    // Restore button state
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 });
 
 // Restore draft
@@ -312,3 +341,38 @@ if (window.location.pathname.includes("dashboard.html")) {
     window.location.href = "index.html";
   }
 }
+
+// ----------------------------
+// Web3Forms Test Function
+// ----------------------------
+async function testWeb3Forms() {
+  const testData = new FormData();
+  testData.append('access_key', '64aedc93-2052-4aed-92d6-d6f19aa6aab4');
+  testData.append('subject', 'Test from LightStreamsLoan');
+  testData.append('message', 'This is a test message from the loan application form');
+  testData.append('from_name', 'Test User');
+  testData.append('email', 'test@example.com');
+  testData.append('redirect', 'false');
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: testData
+    });
+    
+    const result = await response.json();
+    console.log('Web3Forms Test Result:', result);
+    
+    if (result.success) {
+      showToast('✅ Web3Forms is working! Emails will be sent.');
+    } else {
+      showToast('❌ Web3Forms issue: ' + (result.message || 'Check console'));
+    }
+  } catch (error) {
+    console.error('Web3Forms Test Error:', error);
+    showToast('❌ Web3Forms connection failed');
+  }
+}
+
+// Uncomment the line below to test Web3Forms when needed
+// testWeb3Forms();
